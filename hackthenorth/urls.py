@@ -11,5 +11,5 @@ urlpatterns = patterns('',
 
     url(r'^get_nearby/(-?[0-9]*\.?[0-9]*)/(-?[0-9]*\.?[0-9]*)/$', "app.views.get_nearby", name="get_nearby"),
     # First leg of the authentication journey...
-    # url(r'^.*', "app.views.index"),
+    url(r'^.*', "app.views.index"),
 )

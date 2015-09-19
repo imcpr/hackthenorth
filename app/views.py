@@ -14,7 +14,7 @@ User = get_user_model()
 # Create your views here.
 
 def index(request):
-    return HttpResponse("GottaYelp")
+    return render_to_response('yelp/yelp_api.html')
 
 def get_meal():
     time = datetime.time(datetime.now())

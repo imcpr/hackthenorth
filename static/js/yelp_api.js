@@ -35,39 +35,40 @@ function showPosition(position) {
 function getYelpSearch(lattitude, longitude, category_filter) {
     // https://gottayelp.herokuapp.com/get_nearby/0/0/
 
-  // $.ajax({
-  //       type: "GET",
-  //       // accept: "*/*",
-  //       // contentType: "application/x-www-form-urlencoded",
-  //       dataType: "jsonp",
-  //       // jsonpCallback: "yelpResultsCallBack",
-  //       cache: false,
-  //       url: "https://gottayelp.herokuapp.com/get_nearby/" + lattitude + "/" + longitude,
-  //       success: function (data) {
-  //           // console.log(data, bla, test);
-  //           console.log(data);
-  //       },
-  //       error: function (data) {
-  //           console.log(data)
-  //       }
-  //   });
-    // $.get("https://gottayelp.herokuapp.com/get_nearby/" + lattitude + "/" + longitude, yelpResultsCallBack);
+  $.ajax({
+        type: "GET",
+        // accept: "*/*",
+        // contentType: "application/x-www-form-urlencoded",
+        dataType: "jsonp",
+        // jsonpCallback: "yelpResultsCallBack",
+        cache: false,
+        url: "http://127.0.0.1:8000/get_nearby/" + lattitude + "/" + longitude +"/",
+        success: function (data) {
+            // console.log(data, bla, test);
+            console.log(data);
+        },
+        error: function (data) {
+            // console.log(data)
+            alert(data.responseText);
+        }
+    });
+     // $.get("http://127.0.0.1:8000/get_nearby/" + lattitude + "/" + longitude, yelpResultsCallBack);
 
-    $.ajax({
+    /*$.ajax({
       method: "GET",
-      url:  "http://127.0.0.1:8000/get_nearby/" + lattitude + "/" + longitude,
+      url:  "http://127.0.0.1:8000//get_nearby/" + lattitude + "/" + longitude,
       dataType: "json"
       // data: { name: "John", location: "Boston" }
     })
       .done(function( data ) {
         alert( "Data Saved: " + data );
-      });
+      });*/
 
 }
 
 function yelpResultsCallBack (data) {
 
-    // console.log(data);
+    console.log(data);
 
 }
 
