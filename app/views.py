@@ -4,6 +4,7 @@ from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import render_to_response
 from django.conf import settings
 from django.core.urlresolvers import reverse
+from django.http import JsonResponse
 
 import rauth
 import json
@@ -55,4 +56,4 @@ def get_nearby(request, lat, long):
     data = request.json()
     session.close()
     
-    return HttpResponse(json.dumps(data["businesses"]))
+    return JsonResponse(data)
