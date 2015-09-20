@@ -1,6 +1,3 @@
-// var currentBusiness = 0;
-// var businessData = null;
-
 $(document).ready(function() {
 	getFavourites();
 });
@@ -28,7 +25,6 @@ function populateFavourite(data) {
     if (data) {
         for (i = 0; i < data.length; i++) { 
             var response = data[i];
-
             document.getElementById('favourite_places').appendChild(createData(response, false));
 
         }
@@ -76,14 +72,11 @@ function removeFavourite() {
     $( "#recently_visited_section" ).slideUp();
     $( ".horizontalLine" ).slideUp();
     $(".backErrow" ).slideToggle( "slow" );
-
-
 }
 
 function goBack () {
     window.location.href= 'http://127.0.0.1:8000/foodordrink/';
 }
-
 
 function getRatingStarUrl (rating) {
     if(rating === 0.5) {

@@ -1,7 +1,6 @@
 body {
 	margin-left: auto;
 	margin-right: auto;
-	/*background-color: #ffc11c;*/
 	font-family: 'Roboto', sans-serif;
 }
 
@@ -21,9 +20,6 @@ body {
 	margin-left: auto;
 	margin-right: auto;
 	width: 90%;
-	/*height:100%;*/
-
-	/*position:fixed;*/
 }
 
 .businessImage {
@@ -125,10 +121,7 @@ button.bookmark_button {
 }
 
 .buttonBox {
-	/*margin-right: auto;
-	margin-left: auto;*/
 	text-align: center;
-
 }
 
 .no_button {
@@ -209,11 +202,8 @@ button.bookmark_button {
 .munchies_logo {
 	border-radius: 192px;
     border: none;
-    border-color: #ffffff;
-    background: url(/static/assets/logo@2x.png);
-    background-color: #ffffff;
+    background: url(/static/assets/munch_trans.gif);
     background-position: center;
-    background-repeat: no-repeat;
     margin-right: auto;
     margin-left: auto;
     width: 384px;
@@ -233,7 +223,6 @@ button.bookmark_button {
 	font-weight: 300;
 	font-size: 2em;
 	margin-top: 0.5em;
-
 }
 
 .05star {
@@ -420,6 +409,3 @@ button.bookmark_button {
 	display: none;
 
 }
-
-
-

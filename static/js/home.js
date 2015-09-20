@@ -5,13 +5,11 @@ $(document).ready(function() {
 		$( ".home_body" ).animate({
 		    marginTop: "24em"
 		  }, 500, function() {
-		    // Animation complete.
 		  });
 		$(".app_title" ).slideToggle( "slow" );
 		$(".app_title").fadeIn(1500).dequeue(); 
 		redirectToFoodorDrink();
   	});
-
   	
 });
 
