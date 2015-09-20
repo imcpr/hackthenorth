@@ -23,8 +23,10 @@ class Favorite(models.Model):
     user = models.ForeignKey(User)
     name = models.CharField(max_length=200)
     img_url = models.CharField(max_length=200)
-    rating = models.DecimalField(decimal_places=1, max_digits=2)
-    distance = models.IntegerField()
+    # rating = models.DecimalField(decimal_places=1, max_digits=2)
+    rating = models.CharField(max_length=200)
+    # distance = models.IntegerField()
+    distance = models.CharField(max_length=200)
     categories = models.CharField(max_length=200)
     def set_categories(self, x):
         self.categories= json.dumps(x)

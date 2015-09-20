@@ -3,31 +3,26 @@
 <html lang="en">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <title>SELF YELP</title>
-    
-<!--     <link href="Styles/jquery-ui-1.10.4.custom.css" rel="stylesheet" type="text/css" />    
-    <link href="Styles/jquery-ui-1.10.4.custom.min.css" rel="stylesheet" type="text/css" />   -->  
+    <title>Munchi</title>
+
     <link rel="stylesheet" href="{% static 'style/yelp_api.css' %}" type="text/css" media="all" charset="utf-8">
     <link href='https://fonts.googleapis.com/css?family=Roboto:400,300,500' rel='stylesheet' type='text/css'>
   </head>
-  <body id="" class="">
+  <body id="" class="yellowBackground">
   
-
-
-  <!--  <div class="demo" id="demo">This is the demo</div>
-   <button onclick="getLocation()">Try It</button>
- -->
     <div class="business_body">
 
       <div class="business" id="business_info">
       </div>
       <div class="whiteFrame">
-        <img class="businessImage" id="businessImage">
+        <div class="imageContainer"> <img id="businessImage"/></div>
       
         <div class="businessInfo">  
           <h2 id="businessTitle"> </h2>
-          <div class="businessSubInfo" id="businessSubInfo"></div>
+          <img class="" id="businessRating"/>
+          <div class="businessOpen" id="businessSubInfo"></div>
           <div class="businessOpen" id="businessOpen"></div>
+          <div class="businessOpen" id="businessDistance"></div>
         </div>
       </div>
 
@@ -36,8 +31,8 @@
 
     <div class="footer">
       <div class="buttonBox">
-        <button onclick="no_business" class="no_button"></button>
-        <button onclick="bookmark_business" class="bookmark_button"></button>
+        <button onclick="no_business()" class="no_button"></button>
+        <button onclick="bookmark_business()" class="bookmark_button"></button>
       </div>
     </div>
 

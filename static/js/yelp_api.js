@@ -1,138 +1,194 @@
-
-// $(window).load(function () {
-
-// 	getLocation();
-// 	getYelpSearch();
-	
-
-
-// });
+var currentBusiness = 0;
+var businessData = null;
 
 $(document).ready(function() {
 	getLocation();
-	// getYelpSearch();
 });
 
-// var x = document.getElementById("demo");
 function getLocation() {
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(showPosition);
-    } else { 
-        // x.innerHTML = "Geolocation is not supported by this browser.";
     }
 }
 
 function showPosition(position) {
     var latitude = position.coords.latitude;
     var longitude = position.coords.longitude;
-    // x.innerHTML = "Latitude: " + latitude+ 
-    // "<br>Longitude: " + longitude;	
-    // codeLatLng(latitude, longitude);
     getYelpSearch(latitude, longitude, null);
 }
 
 
 function getYelpSearch(lattitude, longitude, category_filter) {
-    // https://gottayelp.herokuapp.com/get_nearby/0/0/
-
   $.ajax({
         type: "GET",
-        // accept: "*/*",
-        // contentType: "application/x-www-form-urlencoded",
-        // dataType: "jsonp",
-        // jsonpCallback: "yelpResultsCallBack",
         cache: false,
         url: "http://127.0.0.1:8000/get_nearby/" + lattitude + "/" + longitude +"/",
         success: function (data) {
             // console.log(data, bla, test);
-            populateBuisinessData(data, 0);
+            businessData = data;
+            populateBuisinessData(data, currentBusiness);
             // console.log(data);
         },
         error: function (data) {
-
-            populateBuisinessData(data.responseText, 0);
+            businessData = data;
+            populateBuisinessData(data.responseText, currentBusiness);
         }
     });
-     // $.get("http://127.0.0.1:8000/get_nearby/" + lattitude + "/" + longitude, yelpResultsCallBack);
-
-    /*$.ajax({
-      method: "GET",
-      url:  "http://127.0.0.1:8000//get_nearby/" + lattitude + "/" + longitude,
-      dataType: "json"
-      // data: { name: "John", location: "Boston" }
-    })
-      .done(function( data ) {
-        alert( "Data Saved: " + data );
-      });*/
-
 }
 
 function yelpResultsCallBack (data) {
 
     console.log(data);
 
+}
 
+
+function no_business() {
+    currentBusiness++; 
+    if (businessData && currentBusiness <= 5) {
+        populateBuisinessData(businessData, currentBusiness);
+    }
+}
+
+function bookmark_business() {
+
+    var data =  businessData[currentBusiness];
+
+    var categories = ''; 
+    for (i = 0; i < data.categories.length; i++) { 
+        if (i === (data.categories.length - 1)) {
+            categories += data.categories[i][1];
+        } else {
+            categories += data.categories[i][1] + ",";
+        }
+    }
+
+    var csrftoken = getCookie('csrftoken');
+    var objectData =
+    {
+        name: data.name,
+        image_url: data.image_url,
+        rating: data.rating,
+        categories: categories,
+        distance: data.distance,
+        CSRF: csrftoken
+    };
+
+    $.ajax({
+        type: "POST",
+        url: "http://127.0.0.1:8000/set_favorite/",
+        dataType: "json",
+        // beforeSend: function(xhr){xhr.setRequestHeader('X-Test-Header', 'test-value');},
+        data: objectData, 
+        success: function (data) {
+           alert('Success');
+
+        },
+        error: function (data) {
+         alert('Error');
+        }
+    });
+
+    // window.location.href= 'http://127.0.0.1:8000/favourites/';
 
 }
 
+function csrfSafeMethod(method) {
+    // these HTTP methods do not require CSRF protection
+    return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
+}
+
+var csrftoken = getCookie('csrftoken');
+
+$.ajaxSetup({
+        beforeSend: function(xhr, settings) {
+            if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
+                xhr.setRequestHeader("X-CSRFToken", csrftoken);
+            }
+        }
+    });
+
+function getCookie(name) {
+    var cookieValue = null;
+    if (document.cookie && document.cookie != '') {
+        var cookies = document.cookie.split(';');
+        for (var i = 0; i < cookies.length; i++) {
+            var cookie = jQuery.trim(cookies[i]);
+            // Does this cookie string begin with the name we want?
+            if (cookie.substring(0, name.length + 1) == (name + '=')) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+            }
+        }
+    }
+    return cookieValue;
+}
+
+
 function populateBuisinessData(data, count)
 {
-    // var count = 1;
     if (data) {
-        // var response = eval('(' + data + ')');
-        var response = data;
-        // for (var i=0; i<data.items.length; i++)
-        // {
-        if (response.businesses.length > 0) {
-            // var division = document.createElement('div');
-            // division.className = 'business';
-            
-
+        var response = data[count];
+        if (data.length > 0) {
+           
             var image = document.getElementById('businessImage');
-            image.src = response.businesses[count].image_url;
-            // division.appendChild(image);
+            image.src = response.image_url.substring(0, response.image_url.lastIndexOf("/")) + "/l.jpg";
             
-            var name = response.businesses[count].name;
+            var name = response.name;
             if (name.length > 22) {
-                name = name.substring(0, 21) + '...';
+                name.value = name.substring(0, 21) + '...';
             }
             var title = document.getElementById('businessTitle');
-            title.appendChild(
-                document.createTextNode(name));
+            title.innerText = name;
 
-            var text_info = response.businesses[count].snippet_text; 
+            var starRating = document.getElementById('businessRating');
+            starRating.src = "/static/assets/" + getRatingStarUrl(response.rating) + ".png";
+            starRating.className = " starRating " + getRatingStarUrl(response.rating);
+
+            var categories = response.categories; 
             var snippet_text = document.getElementById('businessSubInfo');
-            // if (text_info.length > 50) {
-            //     text_info = text_info.substring(0, 49) + '...';
-            // }
-            snippet_text.appendChild(
-                document.createTextNode(text_info));
+            var concatCategories = ''; 
+            for (i = 0; i < categories.length; i++) { 
+                if (i === (categories.length - 1)) {
+                    concatCategories += categories[i][0];
+                } else {
+                    concatCategories += categories[i][0] + ", ";
+                }
+            }
+
+            snippet_text.innerText = concatCategories;
+
+            var distance = document.getElementById('businessDistance');
+            distance.innerText = response.distance + " km";
 
 
-            // division.appendChild(title);
-
-            // var image = document.createElement('img')
-            // image.appendChild(
-            //     document.createImageNode(response.businesses[count].image_url));
-            // division.appendChild(image);
-            // image.className = 'business_image'; 
-            // var image_url = document.createElement
-
-            // var paragraph = document.createElement('p');
-            // paragraph.className = 'description';
-            // paragraph.appendChild(document.createTextNode(
-            //     'Description: ' + data.items[count].description));
-            // paragraph.appendChild(document.createTextNode(
-            //     'Link: ' + data.items[i].link));
-            // paragraph.appendChild(document.createTextNode(
-            //     'Published Date: ' + data.items[count].pubDate));
-            // division.appendChild(paragraph);
-            // document.getElementById('business_info').appendChild(
-            //     division);
         }
     }   
 }
 
+function getRatingStarUrl (rating) {
+    if(rating === 0.5) {
+        return "05star";
+    } else if (rating === 1.0) {
+        return "10star";
+    } else if (rating === 1.5) {
+        return "15star";
+    } else if (rating === 2.0) {
+        return "20star";
+    } else if (rating === 2.5) {
+        return "25star";
+    } else if (rating === 3.0) {
+        return "30star";
+    } else if (rating === 3.5) {
+        return "35star";
+    } else if (rating === 4.0) {
+        return "40star";
+    } else if (rating === 4.5) {
+        return "45star";
+    } else if (rating === 5.0) {
+        return "50star";
+    }
+}
 
 // function codeLatLng(lat, lng) {
 

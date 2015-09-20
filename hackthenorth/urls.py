@@ -14,5 +14,6 @@ urlpatterns = patterns('',
     url(r'^set_favorite/', "app.views.set_favorite"),
     url(r'^foodordrink/', "app.views.foodordrink"),
     url(r'^home/', "app.views.home"),
+    url(r'^favourites/', "app.views.favourites"),
     url(r'^.*', "app.views.index"),
 )

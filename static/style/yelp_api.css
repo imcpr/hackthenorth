@@ -1,7 +1,18 @@
 body {
 	margin-left: auto;
 	margin-right: auto;
+	/*background-color: #ffc11c;*/
+	font-family: 'Roboto', sans-serif;
+}
+
+.yellowBackground {
 	background-color: #ffc11c;
+}
+
+.whiteBackground {
+	margin-left: auto;
+	margin-right: auto;
+	background-color: #ffffff;
 	font-family: 'Roboto', sans-serif;
 }
 
@@ -20,6 +31,7 @@ body {
 	margin-right: auto;
 	margin-left: auto;
 	height: 45em;
+	border: none;
 	background-position: center;
 	background-repeat: no-repeat;
 	-webkit-background-size: cover;
@@ -180,10 +192,6 @@ button.bookmark_button {
 }
 
 .textBox {
-	/*display: block;*/
-	/*text-align: center;	*/
-	/*margin-left: 6%;*/
-	/*margin-right: 5%;*/
 	width:90%;
 	margin-right: auto;
 	margin-left: auto;
@@ -206,7 +214,6 @@ button.bookmark_button {
     background-color: #ffffff;
     background-position: center;
     background-repeat: no-repeat;
-    /*padding: 20px; */
     margin-right: auto;
     margin-left: auto;
     width: 384px;
@@ -218,6 +225,85 @@ button.bookmark_button {
 .home_body {
 	text-align: center;
 	margin-top: 30em;
+}
+
+
+.businessOpen {
+	font-family: 'Roboto', sans-serif;
+	font-weight: 300;
+	font-size: 2em;
+	margin-top: 0.5em;
+
+}
+
+.05star {
+	content:url("/static/assets/05star.png");	
+}
+
+.10star {
+	content:url("/static/assets/10star.png");	
+}
+
+.15star {
+	content:url("/static/assets/15star.png");	
+}
+
+.20star {
+	content:url("/static/assets/20star.png");	
+}
+
+.25star {
+	content:url("/static/assets/25star.png");	
+}
+
+.30star {
+	content:url("/static/assets/30star.png") !important;	
+}
+
+.35star {
+	content:url("/static/assets/35star.png") !important;	
+}
+
+.40star {
+	content:url("/static/assets/40star.png");	
+}
+
+.45star {
+	content:url("/static/assets/45star.png");	
+}
+
+.50star {
+	content:url("/static/assets/50star.png");	
+}
+
+.starRating {
+	width: 35%;
+	height: auto;
+	margin-top: 1.4em;
+	margin-bottom: 0.9em;
+}
+
+.imageContainer {
+	width: 100%;
+	height: 45em; 
+	display:block; 
+	position:relative;
+	overflow:hidden;
+
+}
+
+.imageContainer img {
+	position:absolute;
+	top:0;
+	left:0; 
+	width:100%;
+}
+
+.favourites_text {
+	font-family: 'Roboto', sans-serif;
+	font-weight: 400;
+	font-size: 2.5em;
+	color: #1cc1ff;
 }
 
 

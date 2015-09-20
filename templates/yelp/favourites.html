@@ -3,43 +3,33 @@
 <html lang="en">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <title>Munchi</title>
+    <title>Munchii favourites</title>
     
     <link rel="stylesheet" href="{% static 'style/yelp_api.css' %}" type="text/css" media="all" charset="utf-8">
     <link href='https://fonts.googleapis.com/css?family=Roboto:400,300,500' rel='stylesheet' type='text/css'>
   </head>
-  <body id="" class="yellowBackground">
+  <body id="" class="favourite_page">
   
-    <div class="foodordrink_body">
+    <div class="favourites_body">
 
-      <div class="time_box" id="time_box">
-        12:54 PM
+      <div class="favourites_text">
+        Did you eat here? Rate it!
       </div>
-      <div class="time_sub_text"> It's time for </div>
+
+      <div class="businessEntry"> 
+        <img class="circular_image" id="lastPlaceVisited"/>
+        <div class="place_name" id="place_name"> </div>
+        <div class="place_rating" id="place_rating"> </div>
+      </div>
+
 
     </div>
 
-    <div class="foodordrink_buttons">
-      <div class="buttonBox">
-
-        <button onclick="food_button()" class="food_button"></button>
-        <button onclick="drink_button()" class="drink_button"></button>
-
-        
-      </div>
-      <div class="textBox"> 
-        <div class="buttonText">FOOD</div>
-        <div class="buttonText">DRINK</div>
-      </div>
-
-    </div>
-
- 
 
     <script src="{% static 'js/jquery-1.10.2.js' %}" type="text/javascript"></script>
     <script src="{% static 'js/jquery-ui-1.10.4.custom.min.js' %}" type="text/javascript"></script>
     <script src="{% static 'js/jquery-ui-1.10.4.custom.js' %}" type="text/javascript"></script>
-    <script src="{% static 'js/foodordrink.js?version=100' %}" type="text/javascript" charset="utf-8"></script>
+    <script src="{% static 'js/favourites.js?version=100' %}" type="text/javascript" charset="utf-8"></script>
    
   </body>
 </html>

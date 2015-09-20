@@ -23,7 +23,6 @@ SECRET_KEY = '+8pi*=v69wc)79dfvhxu824fn%e#%d0q@v3$!v26j28p2%+732'
 DEBUG = True
 
 TEMPLATE_DEBUG = True
-CSRF_COOKIE_DOMAIN = None
 
 TEMPLATE_PATH = os.path.join(BASE_DIR, 'templates')
 
