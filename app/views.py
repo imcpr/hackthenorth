@@ -5,6 +5,8 @@ from django.shortcuts import render_to_response
 from django.conf import settings
 from django.core.urlresolvers import reverse
 from django.http import JsonResponse
+from django.contrib.auth.models import User
+from models import WebUser, Favorite
 
 import logging
 import rauth
@@ -24,6 +26,19 @@ def foodordrink(request):
 
 def home(request):
     return render_to_response('yelp/home.html')
+
+def set_favorite(request):
+    user = WebUser.objects.get(id=2)
+    fav = Favorite.objects.create(user_id=2,rating=1.0, distance=0)
+    fav.user = user.user
+    fav.name = request.POST.get("name", "Caspers resto")
+    fav.img_url = request.POST.get("img_url", "qq.jpg")
+    fav.rating = request.POST.get("rating", "3.0")
+    fav.categories = request.POST.get("categories", "taiwanese")
+    fav.distance = request.POST.get("distance", 0)
+    fav.save()
+    return HttpResponse('')
+
 
 def get_meal():
     time = datetime.time(datetime.now())
