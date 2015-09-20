@@ -40,7 +40,17 @@ def set_favorite(request):
     return HttpResponse('')
 
 def favourites(request):
-    return render_to_response('yelp/favourites.html')
+    favs = WebUser.objects.get(id=2).user.favorite_set.all()
+    restos = []
+    for fav in favs:
+        dict = {}
+        dict["rating"] = float(fav.rating)
+        dict["name"] = fav.name
+        dict["image_url"] = fav.img_url
+        restos.append(dict)
+    # return HttpResponse(json.dumps(restos))
+    return render_to_response('yelp/favourites.html', restos)
+
 
 def get_meal():
     time = datetime.time(datetime.now())
