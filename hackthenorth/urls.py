@@ -1,6 +1,6 @@
 from django.conf.urls import patterns, include, url
 from django.contrib import admin
-from app.views import index, get_nearby
+from app.views import index, get_nearby, foodordrink
 
 urlpatterns = patterns('',
     # Examples:
@@ -11,5 +11,7 @@ urlpatterns = patterns('',
 
     url(r'^get_nearby/(-?[0-9]*\.?[0-9]*)/(-?[0-9]*\.?[0-9]*)/$', "app.views.get_nearby", name="get_nearby"),
     # First leg of the authentication journey...
+    url(r'^foodordrink/', "app.views.foodordrink"),
+    url(r'^home/', "app.views.home"),
     url(r'^.*', "app.views.index"),
 )

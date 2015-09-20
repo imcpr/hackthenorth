@@ -16,9 +16,15 @@ User = get_user_model()
 def index(request):
     return render_to_response('yelp/yelp_api.html')
 
+def foodordrink(request):
+    return render_to_response('yelp/foodordrink.html')
+
+def home(request):
+    return render_to_response('yelp/home.html')
+
 def get_meal():
     time = datetime.time(datetime.now())
-    if( time.hour < 11 ) and (time.hour > 6):
+    if( time.hour < 11 ) and (time.hour >= 6):
         return "breakfast"
     elif (time.hour >= 11 and time.hour < 12):
         return "brunch"
@@ -28,17 +34,17 @@ def get_meal():
         return "afternoon tea"
     elif (time.hour >= 17 and time.hour <=20):
         return "dinner"
-    elif (time.hour > 20):
+    elif (time.hour > 20 or time.hour < 6):
         return "snack"
 
 
 def get_nearby(request, lat, long):
 
     #Obtain these from Yelp's manage access page
-    consumer_key = "iSWa2hQ-Kv8MFPg1LcmOUQ"
-    consumer_secret = "6_m9chXf0DD0ly3E496dGk-lRgA"
-    token = "ACKdlyF_e3fqfHlO3gYQMMfz2oUiVBVQ"
-    token_secret = "rDD-b06ViYvmgQ9KHAcERrAo-w8"
+    consumer_key = "F-Epqe-t3SqZI7oeHYChog"
+    consumer_secret = "7Zm2GYFEUTxq-E2zSdLqx5DJ8SA"
+    token = "Lh3NQGlLsKvCbrvpvrxgX7ixM7QmOKjU"
+    token_secret = "6LtYsDJtaGBDzVDubdZQ5bamS5Y"
     
     session = rauth.OAuth1Session(
         consumer_key = consumer_key

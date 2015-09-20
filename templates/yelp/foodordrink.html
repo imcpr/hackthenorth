@@ -12,16 +12,12 @@
   </head>
   <body id="" class="">
   
+    <div class="foodordrink_body">
 
-
-  <!--  <div class="demo" id="demo">This is the demo</div>
-   <button onclick="getLocation()">Try It</button>
- -->
-    <div class="business_body">
-
-      <div class="business" id="business_info">
+      <div class="time_box" id="time_box">
+        12:54 PM
       </div>
-      <div class="whiteFrame">
+      <!-- <div class="whiteFrame">
         <img class="businessImage" id="businessImage">
       
         <div class="businessInfo">  
@@ -29,16 +25,24 @@
           <div class="businessSubInfo" id="businessSubInfo"></div>
           <div class="businessOpen" id="businessOpen"></div>
         </div>
-      </div>
-
+      </div> -->
+      <div class="time_sub_text"> It's time for </div>
 
     </div>
 
-    <div class="footer">
+    <div class="foodordrink_buttons">
       <div class="buttonBox">
-        <button onclick="no_business" class="no_button"></button>
-        <button onclick="bookmark_business" class="bookmark_button"></button>
+
+        <button onclick="food_button()" class="food_button"></button>
+        <button onclick="drink_button()" class="drink_button"></button>
+
+        
       </div>
+      <div class="textBox"> 
+        <div class="buttonText">FOOD</div>
+        <div class="buttonText">DRINK</div>
+      </div>
+
     </div>
 
  
@@ -46,7 +50,7 @@
     <script src="{% static 'js/jquery-1.10.2.js' %}" type="text/javascript"></script>
     <script src="{% static 'js/jquery-ui-1.10.4.custom.min.js' %}" type="text/javascript"></script>
     <script src="{% static 'js/jquery-ui-1.10.4.custom.js' %}" type="text/javascript"></script>
-    <script src="{% static 'js/yelp_api.js?version=100' %}" type="text/javascript" charset="utf-8"></script>
+    <script src="{% static 'js/foodordrink.js?version=100' %}" type="text/javascript" charset="utf-8"></script>
    
   </body>
 </html>
