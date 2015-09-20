@@ -6,12 +6,15 @@ from django.conf import settings
 from django.core.urlresolvers import reverse
 from django.http import JsonResponse
 
+import logging
 import rauth
 import json
+from classifier import best_match
 from datetime import datetime
 User = get_user_model()
 
 # Create your views here.
+logger = logging.getLogger(__name__)
 
 def index(request):
     return render_to_response('yelp/yelp_api.html')
@@ -24,21 +27,22 @@ def home(request):
 
 def get_meal():
     time = datetime.time(datetime.now())
-    if( time.hour < 11 ) and (time.hour >= 6):
+    hour = time.hour - 4
+    if( hour < 11 ) and (hour >= 6):
         return "breakfast"
-    elif (time.hour >= 11 and time.hour < 12):
+    elif (hour >= 11 and hour < 12):
         return "brunch"
-    elif (time.hour >= 12 and time.hour <= 14):
+    elif (hour >= 12 and hour <= 14):
         return "lunch"
-    elif (time.hour > 14 and time.hour < 17):
+    elif (hour > 14 and hour < 17):
         return "afternoon tea"
-    elif (time.hour >= 17 and time.hour <=20):
+    elif (hour >= 17 and hour <=20):
         return "dinner"
-    elif (time.hour > 20 or time.hour < 6):
+    elif (hour > 20 or hour < 6):
         return "snack"
 
 
-def get_nearby(request, lat, long):
+def get_nearby(request, lat, lon):
 
     #Obtain these from Yelp's manage access page
     consumer_key = "F-Epqe-t3SqZI7oeHYChog"
@@ -55,11 +59,15 @@ def get_nearby(request, lat, long):
     params = {}
     params["term"]=get_meal()
     params["location"]="Waterloo"
-    params["cl"] = lat + "," + long
-    params["limit"]= 3
-    request = session.get("http://api.yelp.com/v2/search",params=params)    
+    params["cl"] = lat + "," + lon
+    params["sort"] = 2
+    params["limit"]= 20
+    print (json.dumps(params))
+    request = session.get("http://api.yelp.com/v2/search/",params=params)    
     #Transforms the JSON API response into a Python dictionary
     data = request.json()
+    best_data = best_match(data["businesses"], lon, lat)
+
     session.close()
     
-    return JsonResponse(data)
+    return JsonResponse(best_data, safe=False)
