@@ -10,18 +10,29 @@
   </head>
   <body id="" class="favourite_page">
   
-    <div class="favourites_body">
+    <div class="backErrow">
+      <button class="backWhiteButton" onclick="goBack()"></button>
+    </div>
 
+    <div class="favourites_body" id="recently_visited_section">
+
+      <br><br>
       <div class="favourites_text">
         Did you eat here? Rate it!
       </div>
 
-      <div class="businessEntry"> 
-        <img class="circular_image" id="lastPlaceVisited"/>
-        <div class="place_name" id="place_name"> </div>
-        <div class="place_rating" id="place_rating"> </div>
+      <div id="recently_visited"></div>
+
+    </div>
+    <div class="horizontalLine"></div>
+    <div class="favourites_body">
+
+
+      <div class="favourites_text">
+        You've been to
       </div>
 
+      <div id="favourite_places"></div>
 
     </div>
 

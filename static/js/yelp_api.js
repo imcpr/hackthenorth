@@ -78,23 +78,18 @@ function bookmark_business() {
         type: "POST",
         url: "http://127.0.0.1:8000/set_favorite/",
         dataType: "json",
-        // beforeSend: function(xhr){xhr.setRequestHeader('X-Test-Header', 'test-value');},
         data: objectData, 
         success: function (data) {
-           alert('Success');
-
         },
         error: function (data) {
-         alert('Error');
         }
     });
 
-    // window.location.href= 'http://127.0.0.1:8000/favourites/';
+    window.location.href= 'http://127.0.0.1:8000/favourites/';
 
 }
 
 function csrfSafeMethod(method) {
-    // these HTTP methods do not require CSRF protection
     return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
 }
 
@@ -114,7 +109,6 @@ function getCookie(name) {
         var cookies = document.cookie.split(';');
         for (var i = 0; i < cookies.length; i++) {
             var cookie = jQuery.trim(cookies[i]);
-            // Does this cookie string begin with the name we want?
             if (cookie.substring(0, name.length + 1) == (name + '=')) {
                 cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
                 break;

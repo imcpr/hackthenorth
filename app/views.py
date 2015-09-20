@@ -29,7 +29,7 @@ def home(request):
 
 def set_favorite(request):
     user = WebUser.objects.get(id=1)
-    fav = Favorite.objects.create(user_id=2,rating=1.0, distance=0)
+    fav = Favorite.objects.create(user_id=1,rating=1.0, distance=0)
     fav.user = user.user
     fav.name = request.POST.get("name", "Caspers resto")
     fav.img_url = request.POST.get("image_url", "qq.jpg")
@@ -40,7 +40,10 @@ def set_favorite(request):
     return HttpResponse('')
 
 def favourites(request):
-    favs = WebUser.objects.get(id=2).user.favorite_set.all()
+    return render_to_response('yelp/favourites.html')
+
+def get_favourites(request):
+    favs = WebUser.objects.get(id=1).user.favorite_set.all()
     restos = []
     for fav in favs:
         dict = {}
@@ -48,8 +51,8 @@ def favourites(request):
         dict["name"] = fav.name
         dict["image_url"] = fav.img_url
         restos.append(dict)
-    # return HttpResponse(json.dumps(restos))
-    return render_to_response('yelp/favourites.html', restos)
+    return JsonResponse(restos, safe=False)
+
 
 
 def get_meal():

@@ -257,11 +257,11 @@ button.bookmark_button {
 }
 
 .30star {
-	content:url("/static/assets/30star.png") !important;	
+	content:url("/static/assets/30star.png");	
 }
 
 .35star {
-	content:url("/static/assets/35star.png") !important;	
+	content:url("/static/assets/35star.png");	
 }
 
 .40star {
@@ -304,6 +304,121 @@ button.bookmark_button {
 	font-weight: 400;
 	font-size: 2.5em;
 	color: #1cc1ff;
+	margin-bottom: 1em;
+	margin-top: 1em;
+}
+
+.favourites_body {
+	/*margin-top: 3em;*/
+	margin-left: auto;
+	margin-right: auto;
+	width: 90%;	
+}
+
+.circular_image {
+	border-radius: 60px;
+    border: none;
+    border-color: #ffffff;
+    background-color: #ffffff;
+    background-position: center;
+    background-repeat: no-repeat;
+    margin-right: 3em;
+    margin-left: auto;
+	vertical-align: middle;
+    width: 120px;
+    height: 120px; 
+    float:left;
+}
+
+.place_name {
+	font-family: 'Roboto', sans-serif;
+	font-weight: 400;
+	font-size: 2.5em;
+}
+
+.place {
+	width: 100%;
+	float:left;
+	margin-top: 2em;
+	margin-bottom: 2em;
+	vertical-align: middle;
+}
+
+.horizontalLine {
+	height:2px;
+	width: 100%;
+	background-color: #dcdcdc;
+	margin-top:16em;
+}
+
+.whiteX {
+	border-radius: 50px;
+    border: none;
+    background: url(/static/assets/white_x.png);
+    background-position: center;
+    background-repeat: no-repeat;
+    margin-right: auto;
+    margin-left: auto;
+    width: 100px;
+    height: 100px; 
+}
+
+.blackX {
+	border-radius: 50px;
+    border: none;
+    background: url(/static/assets/black_x4.png);
+    background-position: center;
+    background-repeat: no-repeat;
+    margin-right: auto;
+    margin-left: auto;
+    width: 100px;
+    height: 100px; 
+    float:right;
+    padding-bottom: 2em;
+    margin-top: -3em;
+    opacity: 0.2;
+}
+
+.backButton {
+	border-radius: 50px;
+    border: none;
+    background: url(/static/assets/back.png);
+    background-position: center;
+    background-repeat: no-repeat;
+    margin-right: auto;
+    margin-left: auto;
+    width: 100px;
+    height: 100px; 
+    float:right;
+    padding-bottom: 2em;
+    margin-top: -3em;
+    opacity: 0.2;
+}
+
+.backWhiteButton {
+	border-radius: 50px;
+    border: none;
+    background: url(/static/assets/back_white.png);
+    background-position: center;
+    background-repeat: no-repeat;
+    margin-right: auto;
+    width: 100px;
+    height: 100px; 
+    float:left;
+    padding-bottom: 2em;
+    margin-top: 3.6em;
+    margin-left: 3.6em;
+}
+
+#recently_visited {
+	margin-top: 3em;
+}
+
+.backErrow{
+	height: 12em;
+	background-color: #1cc1ff;
+	display: none;
+
 }
 
 

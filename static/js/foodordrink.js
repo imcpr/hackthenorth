@@ -7,6 +7,8 @@ function getDateTime() {
 	var now = new Date();
     var strDateTime = [[AddZero(now.getHours()), AddZero(now.getMinutes())].join(":"), now.getHours() >= 12 ? "PM" : "AM"].join(" ");
     document.getElementById("time_box").innerText = strDateTime;
+
+    setTimeout(getDateTime, 1000);
 };
     
 function AddZero(num) {

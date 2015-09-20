@@ -1,83 +1,113 @@
-var currentBusiness = 0;
-var businessData = null;
+// var currentBusiness = 0;
+// var businessData = null;
 
 $(document).ready(function() {
 	getFavourites();
 });
 
 function getFavourites() {
-
-	getLocation();
-
-};
-
-function getLocation() {
-    if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(showPosition);
-    }
-}
-
-function showPosition(position) {
-    var latitude = position.coords.latitude;
-    var longitude = position.coords.longitude;
-    getYelpSearch(latitude, longitude, null);
-}
-
-
-function getYelpSearch(lattitude, longitude, category_filter) {
-  $.ajax({
+	$.ajax({
         type: "GET",
         cache: false,
-        url: "http://127.0.0.1:8000/get_nearby/" + lattitude + "/" + longitude +"/",
+        url: "http://127.0.0.1:8000/get_favourites/",
         success: function (data) {
             businessData = data;
-            populateBuisinessData(data, currentBusiness);
+            populateFavourite(data);
+            populateRecentlyVisited(data[data.length-1]);
         },
         error: function (data) {
             businessData = data;
-            populateBuisinessData(data.responseText, currentBusiness);
+            populateFavourite(data);
+            populateRecentlyVisited(data[data.length-1]);
         }
     });
-}
-    
 
-function populateBuisinessData(data, count)
-{
+};
+
+function populateFavourite(data) {
     if (data) {
-        var response = data[count];
-        if (data.length > 0) {
-           
-            var image = document.getElementById('businessImage');
-            image.src = response.image_url;
-            
-            var name = response.name;
-            if (name.length > 22) {
-                name.value = name.substring(0, 21) + '...';
-            }
-            var title = document.getElementById('businessTitle');
-            title.innerText = name;
+        for (i = 0; i < data.length; i++) { 
+            var response = data[i];
 
-            var starRating = document.getElementById('businessRating');
-            starRating.src = "/static/assets/" + getRatingStarUrl(response.rating) + ".png";
-            starRating.className = " starRating " + getRatingStarUrl(response.rating);
-
-            var categories = response.categories; 
-            var snippet_text = document.getElementById('businessSubInfo');
-            var concatCategories = ''; 
-            for (i = 0; i < categories.length; i++) { 
-                if (i === (categories.length - 1)) {
-                    concatCategories += categories[i][0];
-                } else {
-                    concatCategories += categories[i][0] + ", ";
-                }
-            }
-            
-            snippet_text.innerText = concatCategories;
-
-            var distance = document.getElementById('businessDistance');
-            distance.innerText = response.distance + " km";
-
+            document.getElementById('favourite_places').appendChild(createData(response, false));
 
         }
     }   
 }
+
+function populateRecentlyVisited(recentlyVisited) {
+    document.getElementById('recently_visited').appendChild(createData(recentlyVisited, true));
+   
+}
+
+function createData(data, isRecent) {
+    var division = document.createElement('div');
+    division.className = 'place';
+
+    var image = document.createElement('img');
+    image.src = data.image_url;
+    image.className = "circular_image";
+    division.appendChild(image);
+
+    var header = document.createElement('div');
+    header.className = "place_name";
+    header.innerText = data.name;
+    division.appendChild(header);
+
+    var starRating = document.createElement('img');
+    if (isRecent === true) {
+        starRating.src = "/static/assets/" + getRatingStarUrl(00) + ".png";
+    } else {
+        starRating.src = "/static/assets/" + getRatingStarUrl(data.rating) + ".png";
+    }
+    starRating.className = " starRating " + getRatingStarUrl(data.rating);
+    division.appendChild(starRating);
+
+    if (isRecent == true) {
+        var blackxButton = document.createElement('button');
+        blackxButton.className = "blackX";
+        blackxButton.onclick = removeFavourite;
+        division.appendChild(blackxButton);
+    }
+    return division;
+}
+
+function removeFavourite() {
+    $( "#recently_visited_section" ).slideUp();
+    $( ".horizontalLine" ).slideUp();
+    $(".backErrow" ).slideToggle( "slow" );
+
+
+}
+
+function goBack () {
+    window.location.href= 'http://127.0.0.1:8000/foodordrink/';
+}
+
+
+function getRatingStarUrl (rating) {
+    if(rating === 0.5) {
+        return "05star";
+    } else if (rating === 1.0) {
+        return "10star";
+    } else if (rating === 1.5) {
+        return "15star";
+    } else if (rating === 2.0) {
+        return "20star";
+    } else if (rating === 2.5) {
+        return "25star";
+    } else if (rating === 3.0) {
+        return "30star";
+    } else if (rating === 3.5) {
+        return "35star";
+    } else if (rating === 4.0) {
+        return "40star";
+    } else if (rating === 4.5) {
+        return "45star";
+    } else if (rating === 5.0) {
+        return "50star";
+    } else {
+        return "00star";
+    }
+}
+
